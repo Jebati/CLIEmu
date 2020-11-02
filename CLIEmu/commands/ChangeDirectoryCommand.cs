@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace CLIEmu.commands
@@ -12,9 +13,11 @@ namespace CLIEmu.commands
         {
             if (args.Length == 2)
             {
-                if(System.IO.Directory.Exists(args[1]))
+                string path = CommandHandler.Path + "/" + args[1];
+                if (Directory.Exists(path))
                 {
-                    CommandHandler.ToDirectory(args[1]);
+                    DirectoryInfo dir = new DirectoryInfo(path);
+                    CommandHandler.ToDirectory(dir.FullName);
                 } else
                 {
                     return "Directory does not exist";
